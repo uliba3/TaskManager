@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 
 
-const TaskForm = ({ addTask }) => {
+const TaskForm = ({ addTask, checkTask }) => {
     const [task, setTask] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (task.trim() === '') return;
-      if (startDate <= endDate || startDate === '' || endDate === '') {
+      if (checkTask(task)) {
         addTask({ task, startDate, endDate });
         setTask('');
         setStartDate('');

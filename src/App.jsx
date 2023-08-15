@@ -28,6 +28,20 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
+  const editTask = (oldTask, newTask) => {
+    const updatedTasks = tasks.map((task) => (task === oldTask ? newTask : task));
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
+
+  const checkTask = (task) => {
+    if (task.trim() !== '' && (startDate <= endDate || startDate === '' || endDate === '')){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   const handleSort = (sortMethod) => {
     const sorted = [...tasks];
     if(sortMethod === "dueDate") {
@@ -54,9 +68,9 @@ function App() {
   return (
     <div className="App">
       <h1>Task Manager</h1>
-      <TaskForm addTask={addTask} />
+      <TaskForm addTask={addTask} checkTask={checkTask}/>
       <TaskFilter tasks={tasks} onSort={handleSort} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} />
+      <TaskList tasks={tasks} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} editTask={editTask} checkTask={checkTask} />
     </div>
   );
 }

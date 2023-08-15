@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const TaskItem = ({ task, deleteTask }) => {
-    return (
-      <div className="task-item">
+const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTask, setEditedTask] = useState(task);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    if(checkTask(task)){
+      editTask(task, editedTask);
+      setIsEditing(false);
+    }
+  };
+
+  return (
+    <div className="task-item">
+      {isEditing ? (
+        <div>
+          <input
+            type="text"
+            value={editedTask.task}
+            onChange={(e) => setEditedTask({ ...editedTask, task: e.target.value })}
+          />
+          <input
+            type="date"
+            value={editedTask.startDate}
+            onChange={(e) => setEditedTask({ ...editedTask, startDate: e.target.value })}
+          />
+          <input
+            type="date"
+            value={editedTask.endDate}
+            onChange={(e) => setEditedTask({ ...editedTask, endDate: e.target.value })}
+          />
+          <button onClick={handleSave}>Save</button>
+        </div>
+      ) : (
         <div>
           <span>{task.task}</span>
           <p>Start Date: {task.startDate}</p>
           <p>End Date: {task.endDate}</p>
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={() => deleteTask(task)}>Delete</button>
         </div>
-        <button onClick={() => deleteTask(task)}>Delete</button>
-      </div>
-    );
-  };
-  
-  export default TaskItem;
-  
+      )}
+    </div>
+  );
+};
+
+export default TaskItem;
