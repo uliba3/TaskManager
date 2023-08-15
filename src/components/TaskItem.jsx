@@ -1,3 +1,4 @@
+//src/components/TaskItem.jsx
 import React, { useState } from 'react';
 
 const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
