@@ -8,7 +8,8 @@ const TaskForm = ({ addTask }) => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (task.trim() !== '' && startDate <= endDate) {
+      if (task.trim() === '') return;
+      if (startDate <= endDate || startDate === '' || endDate === '') {
         addTask({ task, startDate, endDate });
         setTask('');
         setStartDate('');

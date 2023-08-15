@@ -28,12 +28,35 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(newTasks));
   };
 
+  const handleSort = (sortMethod) => {
+    const sorted = [...tasks];
+    if(sortMethod === "dueDate") {
+      sorted.sort((a, b) => {
+        // Check for empty endDate values and move them to the bottom
+        if (a.endDate === '' && b.endDate !== '') {
+          return 1; // Move a to the bottom
+        }
+        if (a.endDate !== '' && b.endDate === '') {
+          return -1; // Move b to the bottom
+        }
+      
+        // Compare endDate values for non-empty cases
+        return a.endDate.localeCompare(b.endDate);
+      });
+    }
+    if(sortMethod === "startingDate") {
+      sorted.sort((a, b) => a.startDate.localeCompare(b.startDate));
+    }
+    setTasks(sorted);
+    localStorage.setItem('tasks', JSON.stringify(sorted));
+  }
+
   return (
     <div className="App">
       <h1>Task Manager</h1>
       <TaskForm addTask={addTask} />
+      <TaskFilter tasks={tasks} onSort={handleSort} />
       <TaskList tasks={tasks} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} />
-      <TaskFilter />
     </div>
   );
 }
