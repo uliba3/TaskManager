@@ -1,27 +1,43 @@
 import React, { useState } from 'react';
 
+
 const TaskForm = ({ addTask }) => {
-  const [task, setTask] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (task.trim() !== '') {
-      addTask(task);
-      setTask('');
-    }
+    const [task, setTask] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (task.trim() !== '' && startDate <= endDate) {
+        addTask({ task, startDate, endDate });
+        setTask('');
+        setStartDate('');
+        setEndDate('');
+      }
+    };
+  
+    return (
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="Enter task..."
+        />
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        <button type="submit">Add Task</button>
+      </form>
+    );
   };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-        placeholder="Enter task..."
-      />
-      <button type="submit">Add Task</button>
-    </form>
-  );
-};
-
-export default TaskForm;
+  
+  export default TaskForm;
+  
