@@ -24,23 +24,25 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
             value={editedTask.task}
             onChange={(e) => setEditedTask({ ...editedTask, task: e.target.value })}
           />
-          <input
-            type="date"
-            value={editedTask.startDate}
-            onChange={(e) => setEditedTask({ ...editedTask, startDate: e.target.value })}
-          />
-          <input
-            type="date"
-            value={editedTask.endDate}
-            onChange={(e) => setEditedTask({ ...editedTask, endDate: e.target.value })}
-          />
+          <div>
+            <input
+              type="date"
+              value={editedTask.startDate}
+              onChange={(e) => setEditedTask({ ...editedTask, startDate: e.target.value })}
+            />
+            ~
+            <input
+              type="date"
+              value={editedTask.endDate}
+              onChange={(e) => setEditedTask({ ...editedTask, endDate: e.target.value })}
+            />
+          </div>
           <button onClick={handleSave}>Save</button>
         </div>
       ) : (
         <div>
           <span>{task.task}</span>
-          <p>Start Date: {task.startDate}</p>
-          <p>End Date: {task.endDate}</p>
+          <p>{task.startDate}~{task.endDate}</p>
           <button onClick={handleEdit}>Edit</button>
           <button onClick={() => deleteTask(task)}>Delete</button>
         </div>
