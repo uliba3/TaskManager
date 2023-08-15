@@ -24,16 +24,19 @@ const TaskForm = ({ addTask, checkTask }) => {
           onChange={(e) => setTask(e.target.value)}
           placeholder="Enter task..."
         />
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <input
-          type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
+        <div>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          ~
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
         <button type="submit">Add Task</button>
       </form>
     );
