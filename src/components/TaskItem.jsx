@@ -9,7 +9,7 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
   };
 
   const handleSave = () => {
-    if(checkTask(task)){
+    if(checkTask(editedTask)){
       editTask(task, editedTask);
       setIsEditing(false);
     }
