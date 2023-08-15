@@ -49,8 +49,10 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
         <div>
           <p>{task.startDate}~{task.endDate}</p>
           <span>{task.task}</span>
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={() => deleteTask(task)}>Delete</button>
+          <div>
+            <button onClick={handleEdit}>Edit</button>
+            <button onClick={() => deleteTask(task)}>Delete</button>
+          </div>
         </div>
       )}
     </div>
