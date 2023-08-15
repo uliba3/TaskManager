@@ -1,19 +1,21 @@
-//src/components/TaskList.jsx
+// src/components/TaskList.jsx
 import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './TaskItem';
 
 const TaskList = ({ tasks, deleteTask, updateTaskOrder, editTask, checkTask }) => {
+  // Handle drag-and-drop reordering of tasks
   const onDragEnd = (result) => {
     if (!result.destination) return;
-    
+
     const items = Array.from(tasks);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-    
+
     updateTaskOrder(items);
   };
 
+  // Render the task list with drag-and-drop support
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="taskList">
