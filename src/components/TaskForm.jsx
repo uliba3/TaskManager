@@ -8,7 +8,7 @@ const TaskForm = ({ addTask, checkTask }) => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (checkTask(task)) {
+      if (checkTask({ task, startDate, endDate })) {
         addTask({ task, startDate, endDate });
         setTask('');
         setStartDate('');

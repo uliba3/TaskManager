@@ -35,12 +35,9 @@ function App() {
   };
 
   const checkTask = (task) => {
-    console.log(task);
     if (task.task.trim() !== '' && (task.startDate <= task.endDate || task.startDate === '' || task.endDate === '')){
-      console.log("task")
       return true;
     }else {
-      console.log("false");
       return false;
     }
   }
