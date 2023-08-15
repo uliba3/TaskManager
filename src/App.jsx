@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
+import TaskFilter from './components/TaskFilter'
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -32,6 +33,7 @@ function App() {
       <h1>Task Manager</h1>
       <TaskForm addTask={addTask} />
       <TaskList tasks={tasks} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} />
+      <TaskFilter />
     </div>
   );
 }
