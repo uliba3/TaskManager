@@ -25,10 +25,21 @@ input[type="text"] {
 
 button {
   padding: 5px 10px;
-  background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
+}
+
+button:hover {
+  color: black;
+}
+
+button#addTask {
+  background-color: blue;
+}
+
+#sortTasks {
+  background-color: #778899;
 }
 
 /* Task list styles */
@@ -53,6 +64,18 @@ button {
 
 .task-item * {
     margin: 10px;
+}
+
+.task-item button.edit {
+  background-color: skyblue;
+}
+
+.task-item button.delete {
+  background-color: red;
+}
+
+.task-item button.save {
+  background-color: green;
 }
 
 /* Edit mode styles */

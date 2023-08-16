@@ -28,7 +28,7 @@ const TaskFilter = ({ tasks, onSort }) => {
         <option value="dueDate">Due Date</option>
         <option value="startingDate">Starting Date</option>
       </select>
-      <button type="submit">Sort Tasks</button>
+      <button type="submit" id='sortTasks'>Sort Tasks</button>
     </form>
   );
 };

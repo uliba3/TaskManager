@@ -1,5 +1,5 @@
 // src/components/TaskItem.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
   // State to manage task editing mode and edited task details
@@ -19,6 +19,11 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
       setIsEditing(false);
     }
   };
+
+  //update task value if edit is clicked
+  useEffect(() => {
+    setEditedTask(task);
+  }, [isEditing]);
 
   // Render the task item with edit and delete options
   return (
@@ -43,15 +48,15 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
             value={editedTask.task}
             onChange={(e) => setEditedTask({ ...editedTask, task: e.target.value })}
           />
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} className='save'>Save</button>
         </div>
       ) : (
         <div>
           <p>{task.startDate}~{task.endDate}</p>
           <span>{task.task}</span>
           <div>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={() => deleteTask(task)}>Delete</button>
+            <button onClick={handleEdit} className='edit'>Edit</button>
+            <button onClick={() => deleteTask(task)} className='delete'>Delete</button>
           </div>
         </div>
       )}
