@@ -51,6 +51,12 @@ button#addTask {
 }
 
 /* Task item styles */
+.task-item div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .task-item p {
   margin: 0;
   font-size: 14px;
@@ -60,10 +66,6 @@ button#addTask {
 .task-item span {
   font-size: 20px;
   font-weight: bold;
-}
-
-.task-item * {
-    margin: 10px;
 }
 
 .task-item button.edit {
@@ -76,6 +78,11 @@ button#addTask {
 
 .task-item button.save {
   background-color: green;
+}
+
+.task-item input {
+  margin: 0px;
+  padding: 0px;
 }
 
 /* Edit mode styles */

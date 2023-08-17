@@ -51,7 +51,7 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
           <button onClick={handleSave} className='save'>Save</button>
         </div>
       ) : (
-        <div>
+        <div >
           <p>{task.startDate}~{task.endDate}</p>
           <span>{task.task}</span>
           <div>
