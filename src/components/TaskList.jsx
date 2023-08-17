@@ -3,7 +3,7 @@ import React from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ tasks, deleteTask, updateTaskOrder, editTask, checkTask }) => {
+const TaskList = ({ tasks, isThereEditing, setIsThereEditing, deleteTask, updateTaskOrder, editTask, checkTask }) => {
   // Handle drag-and-drop reordering of tasks
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -29,7 +29,7 @@ const TaskList = ({ tasks, deleteTask, updateTaskOrder, editTask, checkTask }) =
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <TaskItem task={task} deleteTask={deleteTask} editTask={editTask} checkTask={checkTask}/>
+                    <TaskItem task={task} isThereEditing={isThereEditing} setIsThereEditing={setIsThereEditing} deleteTask={deleteTask} editTask={editTask} checkTask={checkTask}/>
                   </div>
                 )}
               </Draggable>

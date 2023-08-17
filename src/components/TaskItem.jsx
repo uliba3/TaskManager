@@ -1,7 +1,7 @@
 // src/components/TaskItem.jsx
 import React, { useEffect, useState } from 'react';
 
-const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
+const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTask, checkTask }) => {
   // State to manage task editing mode and edited task details
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
@@ -17,19 +17,23 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
     if(checkTask(editedTask)){
       editTask(task, editedTask);
       setIsEditing(false);
+      setIsThereEditing(false);
     }
   };
 
   //update task value if edit is clicked
   useEffect(() => {
     setEditedTask(task);
+    if(isEditing){
+      setIsThereEditing(true);
+    }
   }, [isEditing]);
 
   // Render the task item with edit and delete options
   return (
-    <div className="task-item">
+    <div className={`task-item ${isEditing ? 'editing' : ''} ${isThereEditing ? 'hidden' : 'view-mode'}`}>
       {isEditing ? (
-        <div>
+        <div className='edit-mode'>
           <div>
             <input
               type="date"
@@ -51,7 +55,7 @@ const TaskItem = ({ task, deleteTask, editTask, checkTask }) => {
           <button onClick={handleSave} className='save'>Save</button>
         </div>
       ) : (
-        <div >
+        <div className={`${isThereEditing ? 'hidden' : 'view-mode'}`}>
           <p>{task.startDate}~{task.endDate}</p>
           <span>{task.task}</span>
           <div>

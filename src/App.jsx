@@ -8,6 +8,7 @@ import './styles.css';
 function App() {
   // State to manage tasks
   const [tasks, setTasks] = useState([]);
+  const [isThereEditing, setIsThereEditing] = useState(false);
 
   // Load tasks from local storage when the component mounts
   useEffect(() => {
@@ -81,7 +82,7 @@ function App() {
       <div>Task Manager</div>
       <TaskForm addTask={addTask} checkTask={checkTask}/>
       <TaskFilter tasks={tasks} onSort={handleSort} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} editTask={editTask} checkTask={checkTask} />
+      <TaskList tasks={tasks} isThereEditing={isThereEditing} setIsThereEditing={setIsThereEditing} deleteTask={deleteTask} updateTaskOrder={updateTaskOrder} editTask={editTask} checkTask={checkTask} />
     </div>
   );
 }
