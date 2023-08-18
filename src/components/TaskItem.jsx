@@ -6,6 +6,13 @@ const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTas
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
+
+  const handleInputKeyPress = (event) => {
+    if (event.key === 'Enter' && isEditing) {
+      handleSave();
+    }
+  }
+
   // Handle edit button click
   const handleEdit = () => {
     setIsEditing(true);
@@ -39,18 +46,21 @@ const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTas
               type="date"
               value={editedTask.startDate}
               onChange={(e) => setEditedTask({ ...editedTask, startDate: e.target.value })}
+              onKeyDown={handleInputKeyPress} // Handle Enter key press
             />
             ~
             <input
               type="date"
               value={editedTask.endDate}
               onChange={(e) => setEditedTask({ ...editedTask, endDate: e.target.value })}
+              onKeyDown={handleInputKeyPress} // Handle Enter key press
             />
           </div>
           <input
             type="text"
             value={editedTask.task}
             onChange={(e) => setEditedTask({ ...editedTask, task: e.target.value })}
+            onKeyDown={handleInputKeyPress} // Handle Enter key press
           />
           <button onClick={handleSave} className='save'>Save</button>
         </div>
