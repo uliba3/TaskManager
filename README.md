@@ -1,49 +1,37 @@
-# Task Manager Application
+# Task Manager
 
-The Task Manager Application is a web-based task management tool that allows users to add, edit, delete, and sort tasks. This README provides an overview of the application's structure and features.
+Task Manager is a simple web application built with React and Redux for managing tasks. It allows users to add, edit, and delete tasks, as well as sort tasks based on due date or starting date. The application also supports drag-and-drop functionality for reordering tasks. The application is deployed and accessible at [here](https://uliba3.github.io/TaskManager/).
 
-## Table of Contents
-
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [License](#license)
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets\taskManager.gif" alt="Task Manager web app gif" width="400">
+  <img src="assets\taskManagerScreenshot.png" alt="Task Manager web app Screenshot" width="400">
+</div>
 
 ## Features
 
-The Task Manager Application includes the following features:
-
-1. **Add Task**: Users can add tasks with a task description, start date, and end date.
-
-2. **Edit Task**: Tasks can be edited, including modifying the task description, start date, and end date.
-
-3. **Delete Task**: Users can delete tasks.
-
-4. **Drag-and-Drop Reordering**: Tasks can be reordered using drag-and-drop functionality.
-
-5. **Task Sorting**: Users can sort tasks by due date or starting date.
-
-6. **Task Validation**: Tasks are validated to ensure that they have a valid task description and that the end date is greater than or equal to the start date.
+- **Add Task:** Users can add tasks with a specified start and end date.
+- **Edit Task:** Tasks can be edited, including changes to the task name, start date, and end date.
+- **Delete Task:** Users can delete tasks they no longer need.
+- **Sort Tasks:** Tasks can be sorted based on due date or starting date.
+- **Drag-and-Drop Reordering:** Tasks can be reordered using drag-and-drop functionality.
 
 ## Getting Started
 
-To get started with the Task Manager Application, follow these steps:
+To run the project locally, follow these steps:
 
-1. Clone the repository to your local machine:
+1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/uliba3/TaskManager.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd task-manager
+   cd TaskManager
    ```
 
-3. Install project dependencies using npm:
+3. Install dependencies:
 
    ```bash
    npm install
@@ -52,61 +40,24 @@ To get started with the Task Manager Application, follow these steps:
 4. Start the development server:
 
    ```bash
-   npm run dev
+   npm start
    ```
 
-5. Open your web browser and visit `http://localhost:3000` to access the Task Manager Application.
-
-## Usage
-
-Once you have the Task Manager Application running, you can use it to manage your tasks:
-
-1. **Add a Task**: To add a new task, enter a task description, start date, and end date in the input fields and click the "Add Task" button.
-
-2. **Edit a Task**: Click the "Edit" button next to a task to enter edit mode. You can modify the task details and click the "Save" button to save your changes.
-
-3. **Delete a Task**: Click the "Delete" button next to a task to delete it.
-
-4. **Reorder Tasks**: Use drag-and-drop to reorder tasks within the task list.
-
-5. **Sort Tasks**: Select a sorting method from the sorting dropdown and click the "Sort Tasks" button to sort the tasks by due date or starting date.
+   This will open the application in your default web browser.
 
 ## Project Structure
 
-The project structure is organized as follows:
+The project is organized into the following directories:
 
-- `index.html`: The main HTML file for the application.
+- **src:** Contains the source code for the React application.
+  - **components:** React components used to build the UI.
+  - **reducers:** Redux reducers for managing state.
+  - **styles.css:** CSS file for styling the application.
+- **public:** Contains the public assets, including the `index.html` file.
 
-- `src/`: The source code directory.
+## Technologies Used
 
-  - `styles.css`: Contains the application's CSS styles.
-
-  - `main.jsx`: The entry point of the React application.
-
-  - `App.jsx`: The main application component that manages tasks.
-
-  - `components/`: Contains React components.
-
-    - `TaskForm.jsx`: The task input form component.
-
-    - `TaskList.jsx`: The task list component with drag-and-drop support.
-
-    - `TaskItem.jsx`: The individual task item component.
-
-    - `TaskFilter.jsx`: The task sorting component.
-
-- `package.json`: Contains project dependencies and scripts.
-
-## Dependencies
-
-The Task Manager Application uses the following dependencies:
-
-- React: A JavaScript library for building user interfaces.
-
-- React Beautiful DND: A library for adding drag-and-drop functionality to React components.
-
-- React DOM: A package for rendering React components into the DOM.
-
-- Vite: A build tool for modern web development.
-
-- ESLint: A tool for identifying and fixing JavaScript code issues.
+- **React:** A JavaScript library for building user interfaces.
+- **Redux:** A predictable state container for JavaScript applications.
+- **react-beautiful-dnd:** A React library for drag-and-drop functionality.
+- **@reduxjs/toolkit:** The official, opinionated, batteries-included toolset for efficient Redux development.
