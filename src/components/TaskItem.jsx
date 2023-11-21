@@ -1,9 +1,14 @@
 // src/components/TaskItem.jsx
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { eraseTask, changeTask, isTaskValid } from '../reducers/taskReducer';
 
-const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTask, checkTask }) => {
+const TaskItem = ({ task }) => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks);
   // State to manage task editing mode and edited task details
   const [isEditing, setIsEditing] = useState(false);
+  const [isThereEditing, setIsThereEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
 
@@ -21,8 +26,8 @@ const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTas
   // Handle save button click
   const handleSave = () => {
     // Check if the edited task is valid before saving
-    if(checkTask(editedTask)){
-      editTask(task, editedTask);
+    if(isTaskValid(editedTask)){
+      dispatch(changeTask(task, editedTask));
       setIsEditing(false);
       setIsThereEditing(false);
     }
@@ -70,7 +75,7 @@ const TaskItem = ({ task, isThereEditing, setIsThereEditing, deleteTask, editTas
           <span>{task.task}</span>
           <div>
             <button onClick={handleEdit} className='edit'>Edit</button>
-            <button onClick={() => deleteTask(task)} className='delete'>Delete</button>
+            <button onClick={() => dispatch(eraseTask(task))} className='delete'>Delete</button>
           </div>
         </div>
       )}

@@ -1,9 +1,17 @@
 // src/components/TaskList.jsx
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { initializeTasks, updateTasks } from '../reducers/taskReducer';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ tasks, isThereEditing, setIsThereEditing, deleteTask, updateTaskOrder, editTask, checkTask }) => {
+const TaskList = ({ deleteTask, updateTaskOrder, editTask, checkTask }) => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks);
+  useEffect(() => {
+    dispatch(initializeTasks());
+  }, []);
   // Handle drag-and-drop reordering of tasks
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -12,7 +20,7 @@ const TaskList = ({ tasks, isThereEditing, setIsThereEditing, deleteTask, update
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    updateTaskOrder(items);
+    dispatch(updateTasks(items));
   };
 
   // Render the task list with drag-and-drop support
@@ -29,7 +37,7 @@ const TaskList = ({ tasks, isThereEditing, setIsThereEditing, deleteTask, update
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                   >
-                    <TaskItem task={task} isThereEditing={isThereEditing} setIsThereEditing={setIsThereEditing} deleteTask={deleteTask} editTask={editTask} checkTask={checkTask}/>
+                    <TaskItem task={task} />
                   </div>
                 )}
               </Draggable>

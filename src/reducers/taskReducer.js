@@ -8,10 +8,10 @@ export const taskSlice = createSlice({
     setTasks: (state, action) => action.payload,
     addTask: (state, action) => [...state, action.payload],
     editTask: (state, action) => {
-      const updatedTask = action.payload;
-      return state.map(task => (task.id === updatedTask.id ? updatedTask : task));
+      const { oldTask, newTask } = action.payload;
+      return state.map(task => (task === oldTask ? newTask : task));
     },
-    deleteTask: (state, action) => state.filter(task => task.id !== action.payload.id),
+    deleteTask: (state, action) => state.filter(task => task !== action.payload),
     sortByDueDate: (state) => [...state].sort((a, b) => sortByDueDateComparator(a, b)),
     sortByStartingDate: (state) => [...state].sort((a, b) => a.startDate.localeCompare(b.startDate)),
   },
@@ -32,11 +32,17 @@ export const { setTasks, addTask, editTask, deleteTask, sortByDueDate, sortBySta
 export const initializeTasks = () => (dispatch) => {
   try {
     const tasksFromLocalStorage = JSON.parse(localStorage.getItem('tasks')) || [];
+    console.log('tasksFromLocalStorage', tasksFromLocalStorage);
     dispatch(setTasks(tasksFromLocalStorage));
   } catch (error) {
     console.error('Error initializing tasks:', error);
   }
 };
+
+export const updateTasks = (newTasks) => (dispatch) => {
+  dispatch(setTasks(newTasks));
+  saveTasksToLocalStorage(newTasks);
+}
 
 export const createTask = (newTask) => (dispatch, getState) => {
   dispatch(addTask(newTask));
@@ -44,8 +50,8 @@ export const createTask = (newTask) => (dispatch, getState) => {
   saveTasksToLocalStorage(updatedTasks);
 };
 
-export const changeTask = (updatedTask) => (dispatch, getState) => {
-  dispatch(editTask(updatedTask));
+export const changeTask = (oldTask, newTask) => (dispatch, getState) => {
+  dispatch(editTask(oldTask, newTask));
   const updatedTasks = getState().tasks;
   saveTasksToLocalStorage(updatedTasks);
 };
