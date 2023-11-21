@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { eraseTask, changeTask, isTaskValid } from '../reducers/taskReducer';
+import { setIsThereEditing } from '../reducers/editingReducer';
 
 const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks);
+  const isThereEditing = useSelector(state => state.isThereEditing);
   // State to manage task editing mode and edited task details
   const [isEditing, setIsEditing] = useState(false);
-  const [isThereEditing, setIsThereEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
 
@@ -29,7 +30,7 @@ const TaskItem = ({ task }) => {
     if(isTaskValid(editedTask)){
       dispatch(changeTask(task, editedTask));
       setIsEditing(false);
-      setIsThereEditing(false);
+      dispatch(setIsThereEditing(false));
     }
   };
 
@@ -37,7 +38,7 @@ const TaskItem = ({ task }) => {
   useEffect(() => {
     setEditedTask(task);
     if(isEditing){
-      setIsThereEditing(true);
+      dispatch(setIsThereEditing(true));
     }
   }, [isEditing]);
 

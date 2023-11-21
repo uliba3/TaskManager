@@ -1,7 +1,11 @@
 // src/components/TaskForm.jsx
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { createTask, isTaskValid } from '../reducers/taskReducer';
 
-const TaskForm = ({ addTask, checkTask }) => {
+const TaskForm = () => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks);
   // State to manage input fields
   const [task, setTask] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -11,8 +15,8 @@ const TaskForm = ({ addTask, checkTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Check if the task is valid before adding
-    if (checkTask({ task, startDate, endDate })) {
-      addTask({ task, startDate, endDate });
+    if (isTaskValid({ task, startDate, endDate })) {
+      dispatch(createTask({ task, startDate, endDate }));
       setTask('');
       setStartDate('');
       setEndDate('');

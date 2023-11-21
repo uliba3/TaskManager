@@ -1,12 +1,11 @@
 // src/components/TaskList.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react';
 import { initializeTasks, updateTasks } from '../reducers/taskReducer';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './TaskItem';
 
-const TaskList = ({ deleteTask, updateTaskOrder, editTask, checkTask }) => {
+const TaskList = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(state => state.tasks);
   useEffect(() => {

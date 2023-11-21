@@ -1,7 +1,11 @@
 // src/components/TaskFilter.jsx
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { sortTasks } from '../reducers/taskReducer';
 
-const TaskFilter = ({ tasks, onSort }) => {
+const TaskFilter = () => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks);
   // State to manage the selected sorting method
   const [sortMethod, setSortMethod] = useState('dueDate');
 
@@ -11,14 +15,14 @@ const TaskFilter = ({ tasks, onSort }) => {
   };
 
   // Handle form submission for sorting
-  const sortTasks = (e) => {
+  const sort = (e) => {
     e.preventDefault();
-    onSort(sortMethod);
+    dispatch(sortTasks(sortMethod));
   };
 
   // Render the task filter component
   return (
-    <form onSubmit={sortTasks}>
+    <form onSubmit={sort}>
       <select
         id="sortMethod"
         name="sortMethod"
